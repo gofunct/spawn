@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: grafana
+  name: grafana
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: grafana
+    spec:
+      containers:
+      - env:
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: GF_SECURITY_ADMIN_PASSWORD
+              name: grafana-grafana-config-monitoring
+        - name: GF_USERS_ALLOW_SIGN_UP
+          valueFrom:
+            configMapKeyRef:
+              key: GF_USERS_ALLOW_SIGN_UP
+              name: grafana-grafana-config-monitoring
+        image: grafana/grafana
+        name: grafana
+        ports:
+        - containerPort: 3000
+        resources: {}
+        securityContext:
+          runAsUser: 104
+        volumeMounts:
+        - mountPath: /var/lib/grafana
+          name: grafana-data
+        - mountPath: /etc/grafana/provisioning/
+          name: grafana-claim1
+      restartPolicy: Always
+      volumes:
+      - name: grafana-data
+        persistentVolumeClaim:
+          claimName: grafana-data
+      - name: grafana-claim1
+        persistentVolumeClaim:
+          claimName: grafana-claim1
+status: {}

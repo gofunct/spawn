@@ -1,0 +1,42 @@
+package: github.pie.apple.com/privatecloud/spawn
+import:
+- package: github.com/golang/glog
+- package: github.com/golang/protobuf
+  version: ~1.2.0
+  subpackages:
+  - proto
+- package: github.com/google/credstore
+  subpackages:
+  - client
+- package: github.com/grpc-ecosystem/go-grpc-middleware
+  version: ~1.0.0
+- package: github.com/grpc-ecosystem/go-grpc-prometheus
+  version: ~1.2.0
+- package: github.com/grpc-ecosystem/grpc-opentracing
+  subpackages:
+  - go/otgrpc
+- package: github.com/mitchellh/go-homedir
+  version: ~1.0.0
+- package: github.com/opentracing/opentracing-go
+  version: ~1.0.2
+- package: github.com/prometheus/client_golang
+  version: ~0.9.0-pre1
+  subpackages:
+  - prometheus
+  - prometheus/promhttp
+- package: github.com/spf13/cobra
+  version: ~0.0.3
+- package: github.com/spf13/viper
+  version: ~1.2.1
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: google.golang.org/grpc
+  version: ~1.15.0
+  subpackages:
+  - credentials
+  - reflection
+- package: golang.org/x/sys
+  version: 1c9583448a9c3aa0f9a6a5241bf73c0bd8aafded
+  subpackages:
+  - unix
